@@ -1,10 +1,8 @@
-// Import the necessary libraries
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-// Get references to HTML elements
 const datePicker = document.querySelector("#datetime-picker");
 const startButton = document.querySelector("[data-start]");
 const daysSpan = document.querySelector("[data-days]");
@@ -12,13 +10,9 @@ const hoursSpan = document.querySelector("[data-hours]");
 const minutesSpan = document.querySelector("[data-minutes]");
 const secondsSpan = document.querySelector("[data-seconds]");
 
-let userSelectedDate = null; // Variable to store the selected date
-let timerId = null; // Timer ID for the countdown
-
-// Disable the Start button initially
+let userSelectedDate = null; 
+let timerId = null; 
 startButton.disabled = true;
-
-// Flatpickr options configuration
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -31,24 +25,20 @@ const options = {
       startButton.disabled = true;
     } else {
       userSelectedDate = selectedDate;
-      startButton.disabled = false; // Enable the Start button when a valid date is selected
+      startButton.disabled = false; 
     }
   },
 };
 
-// Initialize flatpickr
 flatpickr(datePicker, options);
-
-// Event listener for the Start button click
 startButton.addEventListener("click", () => {
   if (userSelectedDate) {
     startCountdown();
-    startButton.disabled = true; // Disable the Start button after it's clicked
-    datePicker.disabled = true;  // Disable the date picker input
+    startButton.disabled = true; 
+    datePicker.disabled = true;  
   }
 });
 
-// Countdown function
 function startCountdown() {
   timerId = setInterval(() => {
     const currentTime = new Date();
@@ -66,7 +56,6 @@ function startCountdown() {
   }, 1000);
 }
 
-// Function to convert milliseconds to time units
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -81,7 +70,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// Function to update the timer display
 function updateTimerDisplay({ days, hours, minutes, seconds }) {
   daysSpan.textContent = addLeadingZero(days);
   hoursSpan.textContent = addLeadingZero(hours);
@@ -89,15 +77,13 @@ function updateTimerDisplay({ days, hours, minutes, seconds }) {
   secondsSpan.textContent = addLeadingZero(seconds);
 }
 
-// Function to add leading zeros to values
 function addLeadingZero(value) {
   return String(value).padStart(2, "0");
 }
 
-// Reset the timer and form
 function resetTimer() {
-  startButton.disabled = true; // Disable the Start button
-  datePicker.disabled = false; // Enable the date picker input
+  startButton.disabled = true; 
+  datePicker.disabled = false; 
   daysSpan.textContent = "00";
   hoursSpan.textContent = "00";
   minutesSpan.textContent = "00";

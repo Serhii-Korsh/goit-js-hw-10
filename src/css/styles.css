@@ -37,3 +37,17 @@
   line-height: 24px;
   letter-spacing: 0.04em;
 }
+
+/* -----snackbar----- */
+
+.form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form label:first-child {
+  display: flex;
+  flex-direction: column;
+}
